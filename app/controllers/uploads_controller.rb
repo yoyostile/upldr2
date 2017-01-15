@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
   http_basic_authenticate_with \
     name: Rails.application.config.http_basic_auth_user,
     password: Rails.application.config.http_basic_auth_password,
-    only: :index
+    only: [:index, :destroy]
 
   def index
     @uploads = Upload.all
