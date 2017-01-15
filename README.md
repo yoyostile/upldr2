@@ -16,10 +16,10 @@ To set this up, clone this repo, edit docker-compose.yml and run `docker-compose
     RAILS_ENV: production
     HTTP_BASIC_AUTH_USER: youruser
     HTTP_BASIC_AUTH_PASS: yourpassword
-    SWEAR_WORDS_TOKEN: 'false'
+    SWEAR_WORDS_TOKEN: 'true'
 ```
 
-Obviously, you should change some of these settings. If you don't want to use swear words as image tokens, just remove the linke completely.
+Obviously, you should change some of these settings. If you don't want to use swear words as image tokens, just remove the line completely.
 `HTTP_BASIC_AUTH_USER` & `HTTP_BASIC_AUTH_USER` are necessary to secure the uploads#index endpoint.
 
 If you want to expose this application to the outer world, you should run a nginx reverse proxy or haproxy in front of it. Google this, if you're not sure, what I'm talking about. Also make sure you have `client_max_body_size` set for nginx.
