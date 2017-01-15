@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title Upldr
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    .container
+      = yield
+
+    %nav.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          = link_to "Upldr", root_path, class: 'navbar-brand'
+        %ul.nav.navbar-nav
+          -# %li= link_to "Show All", uploads_path
+          %li= link_to "Upload", root_path
+          %li= link_to "New Album", new_album_path

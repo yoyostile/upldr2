@@ -1,0 +1,8 @@
+- if params[:album_slug]
+  .row
+    .small-12
+      = link_to 'Back to Album', album_path(params[:album_slug]), class: 'pull-right'
+.row
+  .col-sm-12
+    = form_for @upload, method: :post, html: { id: 'fileDropzone', class: 'dropzone dz-clickable c-dropzone' } do |f|
+      = f.hidden_field(:album_slug, value: params[:album_slug])

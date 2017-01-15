@@ -1,0 +1,35 @@
+version: '2'
+volumes:
+  postgresvolume:
+    driver: local
+  upldrdata:
+    driver: local
+
+services:
+  postgres:
+    image: postgres:9.6.1-alpine
+    environment:
+      POSTGRES_USER: fuckyeah
+      POSTGRES_PASSWORD: yourpassword
+    volumes:
+      - postgresvolume:/var/lib/postgresql/data
+
+  upldr:
+    image: yoyostile/upldr:latest
+    # build: .
+    command: bash -c "bundle exec rake db:create && bundle exec rake db:migrate && bundle exec passenger start -p 5000 --max-pool-size 20 --min-instances 10"
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    volumes:
+      - upldrdata:/app/public/uploads
+    ports:
+      - 5000:5000
+    environment:
+      DATABASE_URL: postgres://fuckyeah:yourpassword@postgres:5432/upldr
+      RAILS_ENV: production
+      HTTP_BASIC_AUTH_USER: youruser
+      HTTP_BASIC_AUTH_PASS: yourpassword
+      SWEAR_WORDS_TOKEN: 'true'
+      SECRET_KEY_BASE: 56903d8c205d6b3bc634916d02aff3e64016086f5dd3a200e339d5e8ba15e7381fa676a04dfc4ff61fa97cb2536f8fffff441e9a5970ed55b39ac6db6c3068a5
